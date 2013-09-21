@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/anjlab/bootstrap-rails.git
+  revision: 2bc320beace2dba793a676283c3a25fc3ce66d85
+  specs:
+    anjlab-bootstrap-rails (3.0.0.3)
+      railties (>= 3.0)
+      sass (>= 3.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -53,6 +61,13 @@ GEM
     execjs (2.0.1)
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
+    haml (4.0.3)
+      tilt
+    haml-rails (0.4)
+      actionpack (>= 3.1, < 4.1)
+      activesupport (>= 3.1, < 4.1)
+      haml (>= 3.1, < 4.1)
+      railties (>= 3.1, < 4.1)
     highline (1.6.13)
     hike (1.2.3)
     i18n (0.6.5)
@@ -147,9 +162,11 @@ PLATFORMS
 
 DEPENDENCIES
   actv
+  anjlab-bootstrap-rails!
   capistrano
   capistrano-ext
   coffee-rails (~> 4.0.0)
+  haml-rails (~> 0.4)
   jbuilder (~> 1.2)
   jquery-rails
   passenger
