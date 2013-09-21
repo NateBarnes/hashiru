@@ -30,6 +30,10 @@ namespace :seed do
       { :name => "Scorpion" },
       { :name => "Sprints" }
     ]
+
+    exercises.each do |exercise|
+      Exercise.create exercise
+    end
   end
 
   desc 'Seed Users'
