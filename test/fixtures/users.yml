@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  mile_time: 1
+  longest_distance: 1.5
+  gender: MyString
+
+two:
+  name: MyString
+  mile_time: 1
+  longest_distance: 1.5
+  gender: MyString
