@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  time: 1
+  efficacy: 1.5
+  name: MyString
+
+two:
+  time: 1
+  efficacy: 1.5
+  name: MyString
