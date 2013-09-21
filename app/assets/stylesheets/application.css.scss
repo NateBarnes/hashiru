@@ -12,4 +12,14 @@
  *= require_tree .
  */
 
+body {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.container {
+  max-width: 330px;
+  background-color: #eee;
+}
+
 @import "twitter/bootstrap";
