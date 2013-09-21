@@ -6,7 +6,7 @@ gem 'rails', '~> 4.0.0'
 gem 'capistrano'
 gem 'rvm-capistrano'
 gem 'capistrano-ext'
-gem 'unicorn'
+gem 'passenger'
 
 gem 'actv'
 
