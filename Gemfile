@@ -8,6 +8,8 @@ gem 'rvm-capistrano'
 gem 'capistrano-ext'
 gem 'unicorn'
 
+gem 'actv'
+
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 
