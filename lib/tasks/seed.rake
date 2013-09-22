@@ -88,29 +88,29 @@ end
 namespace :delete_me do
   desc 'Seed Test Data'
   task :seed_test => :environment do
-    start_workout = Workout.create :user_id => User.first.id, :day => Time.now - 4.weeks
-    middle_workout = Workout.create :user_id => User.first.id, :day => Time.now - 3.weeks
-    end_workout = Workout.create :user_id => User.first.id, :day => Time.now - 2.weeks
+    start_workout = Workout.create! :user_id => User.first.id, :day => Time.now - 4.weeks
+    middle_workout = Workout.create! :user_id => User.first.id, :day => Time.now - 3.weeks
+    end_workout = Workout.create! :user_id => User.first.id, :day => Time.now - 2.weeks
 
-    we1 = start_workout.workout_exercises.create :exercise_id => Exercise.speed_run.id
-    we1.measurements.create :unit => "miles", :value => 1
-    we1.measurements.create :unit => "minutes", :value => 2
+    we1 = start_workout.workout_exercises.create! :exercise_id => Exercise.speed_run.id
+    we1.measurements.create! :unit => "miles", :value => 1
+    we1.measurements.create! :unit => "minutes", :value => 2
 
-    we1 = start_workout.workout_exercises.create :exercise_id => Exercise.distance_run.id
-    we1.measurements.create :unit => "miles", :value => 2
-    we1.measurements.create :unit => "minutes", :value => 2
+    we1 = start_workout.workout_exercises.create! :exercise_id => Exercise.distance_run.id
+    we1.measurements.create! :unit => "miles", :value => 2
+    we1.measurements.create! :unit => "minutes", :value => 2
 
-    we2 = middle_workout.workout_exercises.create :exercise_id => 5
-    we2.measurements.create :unit => "miles", :value => 1
-    we2.measurements.create :unit => "minutes", :value => 2
+    we2 = middle_workout.workout_exercises.create! :exercise_id => 5
+    we2.measurements.create! :unit => "miles", :value => 1
+    we2.measurements.create! :unit => "minutes", :value => 2
 
-    we3 = end_workout.workout_exercises.create :exercise_id => Exercise.speed_run.id
-    we3.measurements.create :unit => "miles", :value => 2
-    we3.measurements.create :unit => "minutes", :value => 1
+    we3 = end_workout.workout_exercises.create! :exercise_id => Exercise.speed_run.id
+    we3.measurements.create! :unit => "miles", :value => 2
+    we3.measurements.create! :unit => "minutes", :value => 1
 
-    we3 = end_workout.workout_exercises.create :exercise_id => Exercise.distance_run.id
-    we3.measurements.create :unit => "miles", :value => 1
-    we3.measurements.create :unit => "minutes", :value => 1
+    we3 = end_workout.workout_exercises.create! :exercise_id => Exercise.distance_run.id
+    we3.measurements.create! :unit => "miles", :value => 1
+    we3.measurements.create! :unit => "minutes", :value => 1
   end
 end
 

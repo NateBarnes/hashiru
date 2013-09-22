@@ -2,7 +2,16 @@ class UserEfficacyGenerator
   include Sidekiq::Worker
 
   def perform user
-    generate_exercise_hash user
+    user_efficacy_hash = { :speed => {}, :distance => {} }
+    User.where(:cluster => user.cluster).load.each do |user|
+      user_efficacy_hash = generate_exercise_hash user
+      user_efficacy_hash.fetch(:speed, {}).merge_or_add user_efficacy_hash.fetch(:speed, {})
+      user_efficacy_hash.fetch(:distance, {}).merge_or_add user_efficacy_hash.fetch(:distance, {})
+    end
+
+    user_efficacy_hash = Efficacy.convert_to_percentages user_efficacy_hash
+
+    user_efficacy_hash
   end
 
   def perform_and_return user
