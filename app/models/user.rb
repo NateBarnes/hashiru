@@ -44,7 +44,17 @@ class User < ActiveRecord::Base
   end
 
   def search_goal
-    "5k"
+    if self.longest_distance < 3.1
+      "5k"
+    elsif self.longest_distance > 3.1 and self.longest_distance < 6.2
+      "10k"
+    elsif self.longest_distance > 6.2 and self.longest_distance < 13.1
+      "half marathon"
+    elsif self.longest_distance > 13.1 and self.longest_distance < 26.2
+      "marathon"
+    else
+      "ultra marathon"
+    end
   end
 
 end
