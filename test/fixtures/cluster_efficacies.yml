@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  exercise_id: 1
+  cluster: 1
+  speed_score: 1.5
+  distance_score: 1.5
+  general_score: 1.5
+
+two:
+  exercise_id: 1
+  cluster: 1
+  speed_score: 1.5
+  distance_score: 1.5
+  general_score: 1.5

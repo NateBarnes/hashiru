@@ -1,6 +1,6 @@
 namespace :seed do
 
-  task all: ["exercises", "users", "clusters", "workouts"]
+  task all: ["exercises", "users", "clusters", "workouts", "efficacy"]
 
   desc 'Seed Exercise'
   task :exercises => :environment do
@@ -81,10 +81,18 @@ namespace :seed do
   desc 'Seed Workouts'
   task :workouts => :environment do
     workouts = {
-      :monday => [[Exercise.find_by_name("Long Slow Run"), Exercise.find_by_name("Fast 1 Mile")].sample],
-      :wednesday => [Exercise.find_by_name("Pull Ups"), Exercise.find_by_name("Sprints"), Exercise.find_by_name("Scorpion"), Exercise.find_by_name("Mixed-Grip Chinup"), Exercise.find_by_name("Overhead Lunge"), Exercise.find_by_name("10x800"), Exercise.find_by_name("16x400m"), Exercise.find_by_name("Core: Side Plank"), Exercise.find_by_name("Core: Bridge"), Exercise.find_by_name("Swim workout"), Exercise.find_by_name("Single-Leg Squat"), Exercise.find_by_name("Plank Flip"), Exercise.find_by_name("Hands-Up Lunge"), Exercise.find_by_name("Ecliptical Machine Training"), Exercise.find_by_name("Pool Running"), Exercise.find_by_name("Swim"), Exercise.find_by_name("Indoor Rowing"), Exercise.find_by_name("Indoor Cycling"), Exercise.find_by_name("Speed Biking"), Exercise.find_by_name("Long Slow Biking"), Exercise.find_by_name("Squats"), Exercise.find_by_name("Sit Ups"), Exercise.find_by_name("Push Ups"), Exercise.find_by_name("Pull Ups")].sample(3),
-      :friday => [Exercise.find_by_name("Pull Ups"), Exercise.find_by_name("Sprints"), Exercise.find_by_name("Scorpion"), Exercise.find_by_name("Mixed-Grip Chinup"), Exercise.find_by_name("Overhead Lunge"), Exercise.find_by_name("10x800"), Exercise.find_by_name("16x400m"), Exercise.find_by_name("Core: Side Plank"), Exercise.find_by_name("Core: Bridge"), Exercise.find_by_name("Swim workout"), Exercise.find_by_name("Single-Leg Squat"), Exercise.find_by_name("Plank Flip"), Exercise.find_by_name("Hands-Up Lunge"), Exercise.find_by_name("Ecliptical Machine Training"), Exercise.find_by_name("Pool Running"), Exercise.find_by_name("Swim"), Exercise.find_by_name("Indoor Rowing"), Exercise.find_by_name("Indoor Cycling"), Exercise.find_by_name("Speed Biking"), Exercise.find_by_name("Long Slow Biking"), Exercise.find_by_name("Squats"), Exercise.find_by_name("Sit Ups"), Exercise.find_by_name("Push Ups"), Exercise.find_by_name("Pull Ups")].sample(3),
-      :saturday => [Exercise.find_by_name("Pull Ups"), Exercise.find_by_name("Sprints"), Exercise.find_by_name("Scorpion"), Exercise.find_by_name("Mixed-Grip Chinup"), Exercise.find_by_name("Overhead Lunge"), Exercise.find_by_name("10x800"), Exercise.find_by_name("16x400m"), Exercise.find_by_name("Core: Side Plank"), Exercise.find_by_name("Core: Bridge"), Exercise.find_by_name("Swim workout"), Exercise.find_by_name("Single-Leg Squat"), Exercise.find_by_name("Plank Flip"), Exercise.find_by_name("Hands-Up Lunge"), Exercise.find_by_name("Ecliptical Machine Training"), Exercise.find_by_name("Pool Running"), Exercise.find_by_name("Swim"), Exercise.find_by_name("Indoor Rowing"), Exercise.find_by_name("Indoor Cycling"), Exercise.find_by_name("Speed Biking"), Exercise.find_by_name("Long Slow Biking"), Exercise.find_by_name("Squats"), Exercise.find_by_name("Sit Ups"), Exercise.find_by_name("Push Ups"), Exercise.find_by_name("Pull Ups")].sample(3)
+      :monday => [Exercise.find_by_name("Long Slow Run"), Exercise.find_by_name("Fast 1 Mile")],
+      :wednesday => Exercise.all.sample(3),
+      :friday => Exercise.all.sample(3),
+      :saturday => Exercise.all.sample(3)
+    }
+
+    generate_measurements = ->(workout){
+      workout.workout_exercises.each do |workout_exercise|
+        JSON.parse(workout_exercise.exercise.units).each do |unit|
+          Measurement.create! unit: unit, value: rand(1..10), workout_exercise_id: workout_exercise.id
+        end
+      end
     }
 
     users = User.all
@@ -96,11 +104,20 @@ namespace :seed do
         friday = s + 5.days
         saturday = s + 6.days
         workout = user.workouts.create! day: monday, exercises: workouts[:monday]
-        user.workouts.create! day: wednesday, exercises: workouts[:wednesday]
-        user.workouts.create! day: friday, exercises: workouts[:friday]
-        user.workouts.create! day: saturday, exercises: workouts[:saturday]
+        generate_measurements.call workout
+        workout = user.workouts.create! day: wednesday, exercises: Exercise.all.sample(3)
+        generate_measurements.call workout
+        workout = user.workouts.create! day: friday, exercises: Exercise.all.sample(3)
+        generate_measurements.call workout
+        workout = user.workouts.create! day: saturday, exercises: Exercise.all.sample(3)
+        generate_measurements.call workout
       end
     end
+  end
+
+  desc 'Seed Efficacy'
+  task :efficacy => :environment do
+    GeneralEfficacyGenerator.new.perform
   end
 end
 
