@@ -38,19 +38,21 @@ class User < ActiveRecord::Base
   def goal_score
     if goal_type == "both"
       "general"
+    elsif goal_type == "faster"
+      "speed"
     else
-      goal_type
+      "distance"
     end
   end
 
   def search_goal
-    if self.longest_distance < 3.1
+    if self.longest_distance < 3.1 or ( self.longest_distance > 3.1 and self.longest_distance < 6.2 and self.goal_type == "faster" )
       "5k"
-    elsif self.longest_distance > 3.1 and self.longest_distance < 6.2
+    elsif self.longest_distance > 3.1 and self.longest_distance < 6.2 or ( self.longest_distance > 6.2 and self.longest_distance < 13.1 and self.goal_type == "faster" )
       "10k"
-    elsif self.longest_distance > 6.2 and self.longest_distance < 13.1
+    elsif self.longest_distance > 6.2 and self.longest_distance < 13.1 or ( self.longest_distance > 13.1 and self.longest_distance < 26.2 and self.goal_type == "faster" )
       "half marathon"
-    elsif self.longest_distance > 13.1 and self.longest_distance < 26.2
+    elsif self.longest_distance > 13.1 and self.longest_distance < 26.2 or ( self.longest_distance > 26.2 and self.longest_distance < 50 and self.goal_type == "faster" )
       "marathon"
     else
       "ultra marathon"
