@@ -1,5 +1,5 @@
 class Exercise < ActiveRecord::Base
-  has_many :workout_exercises
+  has_many :workout_exercises, :dependent => :destroy
   has_many :workouts, :through => :workout_exercises
 
   def self.distance_run
