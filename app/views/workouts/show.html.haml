@@ -1,7 +1,10 @@
 %h2 Congrats! You finished!
 
-- @workout.exercises.each do |exercise|
-  %h3= exercise.name
-  - @workout.measurements.each do |measurement|
-    - if measurement.exercise == exercise
-      %h4= pluralize measurement.value, measurement.unit
+.well
+  - @workout.exercises.each_with_index do |exercise, i|
+    - unless i==0
+      %hr/
+    %h3= exercise.name
+    - @workout.measurements.each do |measurement|
+      - if measurement.exercise == exercise
+        %h4= pluralize measurement.value, measurement.unit

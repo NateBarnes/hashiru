@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130922150303) do
+ActiveRecord::Schema.define(version: 20130922155432) do
 
   create_table "cluster_efficacies", force: true do |t|
     t.integer  "exercise_id"
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20130922150303) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "units"
-    t.string   "instructions"
+    t.text     "instructions", limit: 255
   end
 
   create_table "general_efficacies", force: true do |t|

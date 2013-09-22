@@ -12,4 +12,10 @@ class HomeController < ApplicationController
     current_user.save!
     redirect_to root_path
   end
+
+  def logout
+    super
+    redirect_to root_path
+  end
+
 end
