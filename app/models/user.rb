@@ -21,4 +21,12 @@ class User < ActiveRecord::Base
     (mile_time.to_i/1000) % 60
   end
 
+  def gender_num
+    if gender == "male"
+      1
+    else
+      0
+    end
+  end
+
 end
