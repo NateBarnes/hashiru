@@ -1,5 +1,9 @@
 class HomeController < ApplicationController
   def today
-    redirect_to new_user_path unless current_user
+    if current_user
+      #render today page
+    else
+      redirect_to new_user_path
+    end
   end
 end

@@ -10,6 +10,11 @@
 <body>
 
   <div class="container">
+    <h1>
+      <%= link_to root_path do %>
+        <%= image_tag 'hashiru.png', size: '127x112', alt: 'Hashiru' %> Hashiru
+      <% end %>
+    </h1>
     <%= yield %>
   </div>
 

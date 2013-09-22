@@ -1,8 +1,5 @@
-- if @user.errors.any?
-  #error_explanation
-    %h2
-      = pluralize(@user.errors.count, "error")
-      prohibited your account from being saved:
-    %ul
-      - @user.errors.full_messages.each do |msg|
-        %li= msg
+#error_explanation
+  %h3 Sorry, all fields are required for us to accurately help you
+  %p
+    Please fill in the following fields:
+    = @user.errors.messages.map { |field,_| field.to_s.humanize }.join(', ') + '.'
