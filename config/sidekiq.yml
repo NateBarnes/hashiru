@@ -1,2 +1,2 @@
 development:
-  host: redis://ec2-54-211-35-99.compute-1.amazonaws.com:6379
+  host: redis://localhost:6379
