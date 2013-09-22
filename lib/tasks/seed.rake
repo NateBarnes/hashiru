@@ -62,15 +62,34 @@ namespace :seed do
       { :name => "Elizabeth", :gender => "female", :longest_distance => 16.4, :mile_time => 415_000 }
     ]
 
-    users.each do |user|
-      User.create user
-    end
-  end
 
   desc 'Seed Workouts'
   task :workouts => :environment do
-    
+    workouts = [
+      {:monday :[["Long Slow Run", "Fast 1 Mile"].sample]},
+      {:wednesday :["Pull Ups", "Sprints", "Scorpion", "Mixed-Grip Chinup", "Overhead Lunge", "10x800", "16x400m", "Core: Side Plank", "Core: Bridge", "Swim workout", "Single-Leg Squat", "Plank Flip", "Hands-Up Lunge", "Ecliptical Machine Training", "Pool Running", "Swim", "Indoor Rowing", "Indoor Cycling", "Speed Biking", "Long Slow Biking", "Squats", "Sit Ups", "Push Ups", "Pull Ups"].sample(3)},
+      {:friday :["Pull Ups", "Sprints", "Scorpion", "Mixed-Grip Chinup", "Overhead Lunge", "10x800", "16x400m", "Core: Side Plank", "Core: Bridge", "Swim workout", "Single-Leg Squat", "Plank Flip", "Hands-Up Lunge", "Ecliptical Machine Training", "Pool Running", "Swim", "Indoor Rowing", "Indoor Cycling", "Speed Biking", "Long Slow Biking", "Squats", "Sit Ups", "Push Ups", "Pull Ups"].sample(3)},
+      {:saturday :["Pull Ups", "Sprints", "Scorpion", "Mixed-Grip Chinup", "Overhead Lunge", "10x800", "16x400m", "Core: Side Plank", "Core: Bridge", "Swim workout", "Single-Leg Squat", "Plank Flip", "Hands-Up Lunge", "Ecliptical Machine Training", "Pool Running", "Swim", "Indoor Rowing", "Indoor Cycling", "Speed Biking", "Long Slow Biking", "Squats", "Sit Ups", "Push Ups", "Pull Ups"].sample(3)}
+    ]
+    workouts.each do |workout|
+      Workout.create workout
+    end   
   end
 
+    users = User.all 
+    users.each do |user|
+      25.times do |n|
+        s = (n + 1).weeks.ago
+        monday = s + 1.days
+        wednesday = s + 3.days
+        friday = s + 5.days
+        saturday = s + 6.days
+        user.workouts.create! day: monday, exercises: workouts[:monday]
+        user.workouts.create! day: wednesday, exercises: workouts[:wednesday]
+        user.workouts.create! day: friday, exercises: workouts[:friday]
+        user.workouts.create! day: saturday, exercises: workouts[:saturday]
+      end
+    end
+  end
 end
 
