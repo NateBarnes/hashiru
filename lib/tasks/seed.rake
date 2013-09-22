@@ -1,6 +1,6 @@
 namespace :seed do
 
-  task all: ["exercises", "users", "workouts"]
+  task all: ["exercises", "users", "clusters", "workouts"]
 
   desc 'Seed Exercise'
   task :exercises => :environment do
@@ -31,9 +31,9 @@ namespace :seed do
       { :name => "Sprints", :time => 50, :units => '["miles", "minutes"]', :instructions => "Fast pace is 9:50/mi to 10:00/mi.  Splitting up the run lets you run faster and maintain a tempo effort."},
       { :name => "Fast 1 Mile", :time => 15, :units => '["miles", "minutes"]', :instructions => "Run 1 mile as fast as you can. The faster you run the more time you have left to rest. Target is under 7mpm."}
     ]
-
+    Exercise.delete_all # removes previously seeded exercises
     exercises.each do |exercise|
-      Exercise.create exercise
+      Exercise.create! exercise
     end
   end
 
@@ -62,6 +62,7 @@ namespace :seed do
       { :name => "Elizabeth", :gender => "female", :longest_distance => 16.4, :mile_time => 415_000 }
     ]
 
+<<<<<<< HEAD
 
   desc 'Seed Workouts'
   task :workouts => :environment do
@@ -74,6 +75,27 @@ namespace :seed do
     workouts.each do |workout|
       Workout.create workout
     end   
+=======
+    users.each do |user|
+      User.create! user
+    end
+  end
+
+  desc "Seed Clusters"
+  task :clusters => :environment do
+    generator = UserClusterGenerator.new
+
+    User.all.each do |user|
+      cluster = generator.perform user.gender_num, user.mile_time, user.longest_distance
+      user.cluster = cluster
+      user.save!
+    end
+  end
+
+  desc 'Seed Workouts'
+  task :workouts => :environment do
+
+>>>>>>> c8e777517d380447b2162963a9847eaaa744a8d1
   end
 
     users = User.all 
@@ -90,6 +112,35 @@ namespace :seed do
         user.workouts.create! day: saturday, exercises: workouts[:saturday]
       end
     end
+  end
+end
+
+namespace :delete_me do
+  desc 'Seed Test Data'
+  task :seed_test => :environment do
+    start_workout = Workout.create :user_id => User.first.id, :day => Time.now - 4.weeks
+    middle_workout = Workout.create :user_id => User.first.id, :day => Time.now - 3.weeks
+    end_workout = Workout.create :user_id => User.first.id, :day => Time.now - 2.weeks
+
+    we1 = start_workout.workout_exercises.create :exercise_id => Exercise.speed_run.id
+    we1.measurements.create :unit => "miles", :value => 1
+    we1.measurements.create :unit => "minutes", :value => 2
+
+    we1 = start_workout.workout_exercises.create :exercise_id => Exercise.distance_run.id
+    we1.measurements.create :unit => "miles", :value => 2
+    we1.measurements.create :unit => "minutes", :value => 2
+
+    we2 = middle_workout.workout_exercises.create :exercise_id => 5
+    we2.measurements.create :unit => "miles", :value => 1
+    we2.measurements.create :unit => "minutes", :value => 2
+
+    we3 = end_workout.workout_exercises.create :exercise_id => Exercise.speed_run.id
+    we3.measurements.create :unit => "miles", :value => 2
+    we3.measurements.create :unit => "minutes", :value => 1
+
+    we3 = end_workout.workout_exercises.create :exercise_id => Exercise.distance_run.id
+    we3.measurements.create :unit => "miles", :value => 1
+    we3.measurements.create :unit => "minutes", :value => 1
   end
 end
 

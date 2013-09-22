@@ -1,0 +1,15 @@
+%h2#today-title Today
+
+- if current_user.has_event?
+  = link_to '#', class: 'btn btn-block btn-huge btn-primary' do
+    Today's Workout
+    %span.glyphicon.glyphicon-arrow-right
+
+  countdown to event
+- else
+  = link_to new_workout_path, class: 'btn btn-block btn-huge btn-primary' do
+    Workout
+    %span.glyphicon.glyphicon-chevron-right.pull-right{style: 'margin-right: 10px'}
+  = link_to new_event_path, class: 'btn btn-block btn-huge btn-success' do
+    Choose a race
+    %span.glyphicon.glyphicon-th-list.pull-right{style: 'margin-right: 10px'}

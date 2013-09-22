@@ -1,0 +1,5 @@
+#error_explanation
+  %h3 Sorry, all fields are required for us to accurately help you
+  %p
+    Please fill in the following fields:
+    = @user.errors.messages.map { |field,_| field.to_s.humanize }.join(', ') + '.'

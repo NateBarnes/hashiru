@@ -1,22 +1,46 @@
-%h1
-  = image_tag 'hashiru.png', alt: 'Hashiru'
-  Welcome
-
 = form_for @user do |f|
   #step1
-    = f.text_field :name, class: 'form-control', placeholder: 'Your Name', autofocus: ""
-    = f.text_field :gender, class: 'form-control', placeholder: 'Your Gender'
+    - if @user.errors.any?
+      = render partial: 'form_errors'
+    - else
+      %h3 Let's get started with some basic information
+    .form-group
+      = f.text_field :name, class: 'form-control input-lg', placeholder: 'Your Name', autofocus: ""
+    .form-group
+      = f.select :gender, options_for_select([['Select your gender', nil], ['Female', 'female'], ['Male', 'male']]), {}, class: 'form-control input-lg'
     = link_to 'Continue', '', class: 'btn btn-success btn-lg btn-block', id: 'continue'
-  #step2
-    = f.text_field :mile_time, class: 'form-control', placeholder: 'Your fastest mile'
-    = f.text_field :longest_distance, class: 'form-control', placeholder: 'Your longest distance'
-    = f.submit 'Go!', class: 'btn btn-lg btn-success btn-block'
+  #step2{style: 'display: none;'}
+    %h3 We need to know a little more about you
+    .form-group
+      = f.label :mile_time, 'What is your fastest mile time?'
+      .row
+        .input-group.col-xs-6.left-side
+          = f.text_field :mile_time_minutes, class: 'form-control input-lg col-xs-6'
+          %span.input-group-addon min
+        .input-group.col-xs-6.right-side
+          = f.text_field :mile_time_seconds, class: 'form-control input-lg col-xs-6'
+          %span.input-group-addon sec
+    .form-group
+      = f.label :longest_distance, 'How about the longest distance you have run?'
+      .input-group
+        = f.text_field :longest_distance, class: 'form-control input-lg'
+        %span.input-group-addon miles
+    = link_to 'Almost Done!', '', class: 'btn btn-success btn-lg btn-block', id: 'continue2'
+  #step3{style: 'display: none;'}
+    %h3 Ok, what can Hashiru do for you?
+    .form-group
+      = f.select :goal_type, options_for_select([['Select your goal', nil], ['Run Faster', 'faster'], ['Run Longer', 'longer'], ['Both', 'both']]), {}, class: 'form-control input-lg'
+    = f.submit 'Finish!', class: 'btn btn-lg btn-success btn-block'
 
 :coffee
   step1 = $ '#step1'
   step2 = $ '#step2'
-  continue_button = $ '#continue'
-  continue_button.on 'click', (e) ->
+  step3 = $ '#step3'
+  continue1 = $ '#continue'
+  continue2 = $ '#continue2'
+  continue1.on 'click', (e) ->
     e.preventDefault()
-    step1.fadeOut ->
-      step2.fadeIn()
+    step1.fadeOut -> step2.fadeIn()
+  continue2.on 'click', (e) ->
+    e.preventDefault()
+    step2.fadeOut -> step3.fadeIn()
