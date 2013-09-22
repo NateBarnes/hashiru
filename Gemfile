@@ -13,6 +13,7 @@ gem 'passenger'
 gem 'actv'
 gem 'pry'
 gem 'rb-libsvm', :require => 'libsvm'
+gem 'heroku', :require => false
 
 # Use sqlite3 as the database for Active Record
 group :development do
