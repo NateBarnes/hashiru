@@ -1,0 +1,22 @@
+%h1
+  = image_tag 'hashiru.png', alt: 'Hashiru'
+  Welcome
+
+= form_for @user do |f|
+  #step1
+    = f.text_field :name, class: 'form-control', placeholder: 'Your Name', autofocus: ""
+    = f.text_field :gender, class: 'form-control', placeholder: 'Your Gender'
+    = link_to 'Continue', '', class: 'btn btn-success btn-lg btn-block', id: 'continue'
+  #step2
+    = f.text_field :mile_time, class: 'form-control', placeholder: 'Your fastest mile'
+    = f.text_field :longest_distance, class: 'form-control', placeholder: 'Your longest distance'
+    = f.submit 'Go!', class: 'btn btn-lg btn-success btn-block'
+
+:coffee
+  step1 = $ '#step1'
+  step2 = $ '#step2'
+  continue_button = $ '#continue'
+  continue_button.on 'click', (e) ->
+    e.preventDefault()
+    step1.fadeOut ->
+      step2.fadeIn()

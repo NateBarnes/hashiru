@@ -1,17 +1,1 @@
 %h1 Hashiru
-
-= form_for @user do |f|
-  %h2 Welcome to Hashiru!
-  .form-group
-    = f.label :name
-    = f.text_field :name
-  .form-group
-    = f.label :gender
-    = f.text_field :gender
-
-%form.form-signin
-  %h2.form-signin-heading Please sign in
-  %input.form-control{:autofocus => "", :placeholder => "Email address", :type => "text"}/
-  %input.form-control{:placeholder => "Password", :type => "password"}/
-  %button.btn.btn-lg.btn-block{:type => "submit"} Sign in
-

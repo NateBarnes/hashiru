@@ -1,6 +1,7 @@
 Hashiru::Application.routes.draw do
-  root 'home#index'
+  root 'home#today'
 
-  get  'register' => 'home#register'
-  post 'register' => 'home#register'
+  get 'today' => 'home#today', as: :today
+
+  resources :users
 end
