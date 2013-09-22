@@ -4,4 +4,6 @@ Hashiru::Application.routes.draw do
   get 'today' => 'home#today', as: :today
 
   resources :users
+  resources :workouts
+  resource :event
 end
