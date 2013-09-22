@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 20130922061649) do
     t.string   "gender"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "goal_type"
+    t.string   "goal_type",        default: "both"
     t.integer  "cluster",          default: 0
   end
 

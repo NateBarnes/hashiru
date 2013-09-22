@@ -5,8 +5,6 @@ class UserEfficacyGenerator
     user_efficacy_hash = { :speed => {}, :distance => {} }
     User.where(:cluster => user.cluster).load.each do |user|
       user_efficacy_hash = generate_exercise_hash user
-      user_efficacy_hash.fetch(:speed, {}).merge_or_add user_efficacy_hash.fetch(:speed, {})
-      user_efficacy_hash.fetch(:distance, {}).merge_or_add user_efficacy_hash.fetch(:distance, {})
     end
 
     user_efficacy_hash = Efficacy.convert_to_percentages user_efficacy_hash
@@ -28,7 +26,7 @@ private
 
   def generate_delta_hash user, type
     exercise_deltas = {}
-    benchmark_workout_exercises = WorkoutExercise.where(WorkoutExercise.arel_table["exercise_id"].eq(Exercise.send("#{type.to_s}_run").id)).joins(:workout).where(Workout.arel_table["user_id"].eq(User.first.id))
+    benchmark_workout_exercises = WorkoutExercise.where(WorkoutExercise.arel_table["exercise_id"].eq(Exercise.send("#{type.to_s}_run").id)).joins(:workout).where(Workout.arel_table["user_id"].eq(user.id)).order(Workout.arel_table[:day])
     benchmark_workout_exercises.each_with_index do |first_workout_exercise, idx|
       first_workout = first_workout_exercise.workout
       unless idx+1 >= benchmark_workout_exercises.size
