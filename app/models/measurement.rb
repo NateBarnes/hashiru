@@ -3,3 +3,4 @@ class Measurement < ActiveRecord::Base
   has_one :workout, :through => :workout_exercise
   has_one :exercise, :through => :workout_exercise
 end
+
