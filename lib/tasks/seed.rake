@@ -1,6 +1,6 @@
 namespace :seed do
 
-  task all: ["exercises", "users"]
+  task all: ["exercises", "users", "workouts"]
 
   desc 'Seed Exercise'
   task :exercises => :environment do
@@ -65,6 +65,11 @@ namespace :seed do
     users.each do |user|
       User.create user
     end
+  end
+
+  desc 'Seed Workouts'
+  task :workouts => :environment do
+    
   end
 
 end
