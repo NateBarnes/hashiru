@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   include ActiveModel::ForbiddenAttributesProtection
   validates_presence_of :name, :gender, :mile_time, :longest_distance, :goal_type
   has_many :workouts, :dependent => :destroy
+  has_many :workout_exercises, :through => :workouts
   has_one :event
 
   after_save :recluster
@@ -59,4 +60,16 @@ class User < ActiveRecord::Base
     end
   end
 
+  def exercise_history exercise
+    hsh = {}
+    workout_exercises.where(:exercise_id => exercise.id).load.each do |workout_exercise|
+      JSON.parse(workout_exercise.exercise.units).each do |unit|
+        hsh.merge_or_add unit => [workout_exercise.measurements.where(:unit => unit).first.value]
+      end
+      hsh.merge_or_add "timestamps" => [workout_exercise.workout.day.to_i]
+    end
+
+    hsh
+  end
 end
+
