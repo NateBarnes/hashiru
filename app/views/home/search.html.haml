@@ -1,1 +1,14 @@
-%h1 WHY GOD WHY ADAM
+%h2 Here are some events in your area
+
+- @events.results.each do |event|
+  - event_attrs = {asset_guid: event.assetGuid, name: event.assetName, location: "#{event.place.cityName}, #{event.place.stateProvinceCode}", date: DateTime.parse(event.activityStartDate).strftime('%b %d, %Y') }
+  .well
+    %h3= event_attrs[:name].html_safe
+    %h4
+      Location:
+      = event_attrs[:location]
+    %h4
+      Date:
+      = event_attrs[:date]
+    = link_to 'Train for this event', save_event_path(event: event_attrs), method: :post, class: 'btn btn-lg btn-success btn-block'
+

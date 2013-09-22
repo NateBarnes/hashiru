@@ -1,13 +1,15 @@
 class HomeController < ApplicationController
   def today
-    if current_user
-      #render today page
-    else
-      redirect_to new_user_path
-    end
+    redirect_to new_user_path unless current_user
   end
 
   def search
-    ACTV.events query, lat_lng: cookies[:lat_lng]
+    @events = ACTV.events current_user.search_goal, lat_lon: cookies[:location], radius: 25, per_page: 8, start_date: "#{2.months.from_now.strftime('%Y-%m-%d')}.."
+  end
+
+  def save_event
+    current_user.event = Event.create params.require(:event).permit :name, :location, :date, :asset_guid
+    current_user.save!
+    redirect_to root_path
   end
 end

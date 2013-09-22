@@ -1,15 +1,23 @@
 %h2#today-title Today
 
 - if current_user.has_event?
-  = link_to '#', class: 'btn btn-block btn-huge btn-primary' do
+  = link_to new_workout_path, class: 'btn btn-block btn-huge btn-primary' do
     Today's Workout
-    %span.glyphicon.glyphicon-arrow-right
+  .event
+    %h3 You are training for
+    %h4= current_user.event.name.html_safe
+    %h5
+      Location:
+      = current_user.event.location
+    %h5
+      Date:
+      = current_user.event.date.strftime '%b %d, %Y'
+    = link_to 'Pick a new event', search_path, class: 'btn btn-danger btn-outline btn-block'
 
-  countdown to event
 - else
   = link_to new_workout_path, class: 'btn btn-block btn-huge btn-primary' do
     Workout
-  = link_to new_event_path, class: 'btn btn-block btn-huge btn-success' do
+  = link_to search_path, class: 'btn btn-block btn-huge btn-success' do
     Choose a race
 
 :coffee

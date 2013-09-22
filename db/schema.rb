@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130922110921) do
+ActiveRecord::Schema.define(version: 20130922150303) do
 
   create_table "cluster_efficacies", force: true do |t|
     t.integer  "exercise_id"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20130922110921) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.string   "asset_guid"
+    t.string   "location"
   end
 
   create_table "exercises", force: true do |t|
