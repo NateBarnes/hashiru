@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130921223749) do
+ActiveRecord::Schema.define(version: 20130921231131) do
 
   create_table "exercises", force: true do |t|
     t.integer  "time"
@@ -21,6 +21,15 @@ ActiveRecord::Schema.define(version: 20130921223749) do
     t.datetime "updated_at"
     t.string   "units"
     t.string   "instructions"
+  end
+
+  create_table "general_efficacies", force: true do |t|
+    t.integer  "exercise_id"
+    t.float    "speed_score"
+    t.float    "distance_score"
+    t.float    "general_score"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "measurements", force: true do |t|
