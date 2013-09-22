@@ -1,2 +1,5 @@
 development:
   host: redis://localhost:6379
+production:
+  host: redis://localhost:6379
+
