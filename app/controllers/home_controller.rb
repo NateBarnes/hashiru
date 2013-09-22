@@ -6,4 +6,8 @@ class HomeController < ApplicationController
       redirect_to new_user_path
     end
   end
+
+  def search
+
+  end
 end
