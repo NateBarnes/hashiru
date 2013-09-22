@@ -3,6 +3,7 @@
 
 require 'bundler/capistrano'
 require 'capistrano/ext/multistage'
+require 'sidekiq/capistrano'
 
 # capistrano-ext lets you configure for multiple environments, see config/deploy/qa.rb
 set :stages, %w(dev)
