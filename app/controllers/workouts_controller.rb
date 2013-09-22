@@ -7,7 +7,7 @@ class WorkoutsController < ApplicationController
     @workout = Workout.new workout_params
 
     if @workout.save
-      redirect_to today_path
+      redirect_to :somewhere
     else
       render :new
     end

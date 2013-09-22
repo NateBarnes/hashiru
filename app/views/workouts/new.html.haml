@@ -1,0 +1,7 @@
+= form_for @workout do |f|
+  = f.fields_for :exercise do |ef|
+    %h3= ef.object.name
+    %p= ef.object.instructions
+    = ef.fields_for :measurements do |mf|
+      = mf.label :value
+      = mf.text_field :value
