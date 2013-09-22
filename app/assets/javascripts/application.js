@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.cookie
 // add these as needed
 // require twitter/bootstrap/transition
 // require twitter/bootstrap/alert
