@@ -3,19 +3,27 @@ class WorkoutsController < ApplicationController
     @workout = Workout.generate current_user
   end
 
-  def create
-    @workout = Workout.new workout_params
-
+  def update
+    @workout = Workout.find params[:id]
+    workout_params[:measurements_attributes].each do |_, measurement_params|
+      measurement = Measurement.find(measurement_params.delete :id)
+      measurement.update_attributes measurement_params
+      binding.pry #does the meas have a wo
+    end
     if @workout.save
-      redirect_to :somewhere
+      redirect_to @workout
     else
       render :new
     end
   end
 
+  def show
+    @workout = Workout.find params[:id]
+  end
+
   private
   def workout_params
-    params.require(:workout).permit :nothing_yet
+    params.require(:workout).permit measurements_attributes: [:id, :unit, :value]
   end
 
 end

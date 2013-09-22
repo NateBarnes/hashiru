@@ -15,10 +15,11 @@ class Workout < ActiveRecord::Base
       Exercise.find_by_name("Push Ups"),
       Exercise.find_by_name("Fast 1 Mile")
     ]
-    workout = user.workouts.build day: Date.today, exercises: exercises
-    exercises.each do |exercise|
-      JSON.parse(exercise.units).each do |unit|
-        workout.measurements.build unit: unit, value: 5, exercise: exercise
+    workout = user.workouts.create day: Date.today, exercises: exercises
+    workout.workout_exercises.each do |workout_exercise|
+      JSON.parse(workout_exercise.exercise.units).each do |unit|
+        measurement = workout.measurements.build unit: unit, value: 5, workout_exercise_id: workout_exercise.id
+        measurement.save
       end
     end
     workout

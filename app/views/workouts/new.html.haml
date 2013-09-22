@@ -1,7 +1,12 @@
 = form_for @workout do |f|
-  = f.fields_for :exercise do |ef|
-    %h3= ef.object.name
-    %p= ef.object.instructions
-    = ef.fields_for :measurements do |mf|
-      = mf.label :value
-      = mf.text_field :value
+  - @workout.exercises.each do |exercise|
+    %h3= exercise.name
+    %p= exercise.instructions
+    = f.fields_for :measurements, include_id: false do |mf|
+      - if mf.object.exercise == exercise
+        .input-group{style: 'margin-bottom: 10px'}
+          = mf.hidden_field :id
+          = mf.hidden_field :unit
+          = mf.text_field :value, class: 'form-control input-lg'
+          %span.input-group-addon= mf.object.unit.humanize
+  = f.submit "I'm done!", class: 'btn btn-lg btn-success btn-block'
