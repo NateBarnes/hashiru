@@ -31,7 +31,7 @@ class Workout < ActiveRecord::Base
 
       val = lr.predict(workout_exercise.workout.day.to_i)
     rescue
-      puts "Rescueing Regression Prediction"
+      puts "Rescuing Regression Prediction"
     end
 
     val
