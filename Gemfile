@@ -10,6 +10,7 @@ gem 'capistrano-ext'
 gem 'passenger'
 
 gem 'actv'
+gem 'pry'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
