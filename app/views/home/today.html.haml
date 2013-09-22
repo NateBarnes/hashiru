@@ -12,7 +12,7 @@
     %h5
       Date:
       = current_user.event.date.strftime '%b %d, %Y'
-    = link_to 'Pick a new event', search_path, class: 'btn btn-danger btn-outline btn-block'
+    = link_to 'Pick a new event', search_path, class: 'btn btn-warning btn-outline btn-block'
 
 - else
   = link_to new_workout_path, class: 'btn btn-block btn-huge btn-primary' do
