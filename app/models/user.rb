@@ -43,4 +43,8 @@ class User < ActiveRecord::Base
     end
   end
 
+  def search_goal
+    "5k"
+  end
+
 end
