@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
   end
 
   def recluster
-    UserClusterGenerator.perform_async gender_num, mile_time, longest_distance
+    UserClusterGenerator.perform_async gender_num, mile_time, longest_distance rescue nil
   end
 
   def goal_score

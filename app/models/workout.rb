@@ -7,7 +7,7 @@ class Workout < ActiveRecord::Base
 
   after_save :repopulate_efficacy
   def repopulate_efficacy
-    GeneralEfficacyGenerator.perform_async
+    GeneralEfficacyGenerator.perform_async rescue nil
   end
 
   def self.generate user
