@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  speed_score: 1.5
+  distance_score: 1.5
+  general_score: 1.5
+
+two:
+  speed_score: 1.5
+  distance_score: 1.5
+  general_score: 1.5
