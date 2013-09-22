@@ -4,14 +4,17 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(params[:user].permit :name, :gender)
-   
-    if @user.save
-      redirect_to today_path
-    else
-      render :new
-    end
+    @user = User.new user_params
+    if @user.save
+      redirect_to today_path
+    else
+      render :new
+    end
+  end
 
+  private
+  def user_params
+    params.require(:user).permit :name, :gender, :mile_time, :longest_distance, :goal_type
   end
 
 end

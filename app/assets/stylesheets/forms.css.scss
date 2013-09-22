@@ -1,35 +1,13 @@
 form {
   padding: 15px;
   margin: 0 auto;
-}
-form h2, form.checkbox {
-  margin-bottom: 10px;
-}
-form .checkbox {
-  font-weight: normal;
-}
-form .form-control {
-  position: relative;
-  font-size: 16px;
-  height: auto;
-  padding: 10px;
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
-}
-form .form-control:focus {
-  z-index: 9;
-}
-form input#user_name, form input#user_mile_time {
-  margin-bottom: -1px;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
-form input#user_gender, form input#user_longest_distance {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
-form #step2 {
-  display: none;
+  h2, .checkbox {
+    margin-bottom: 10px;
+  }
+  .input-group.col-xs-6.left-side {
+    padding-right: 2px;
+  }
+  .input-group.col-xs-6.right-side {
+    padding-left: 2px;
+  }
 }
