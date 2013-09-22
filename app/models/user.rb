@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   has_many :workouts, :dependent => :destroy
   has_one :event
 
+  after_save :recluster
+
   def has_event?
     event.present?
   end
@@ -27,6 +29,10 @@ class User < ActiveRecord::Base
     else
       0
     end
+  end
+
+  def recluster
+    UserClusterGenerator.perform_async gender_num, mile_time, longest_distance
   end
 
 end
