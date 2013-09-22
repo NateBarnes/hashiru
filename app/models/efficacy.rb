@@ -1,6 +1,11 @@
 class Efficacy
   attr_accessor :exercise, :user
 
+  def self.score_array arr
+    sum = arr.inject{|sum,x| sum + x }
+    ((sum/Float(arr.size))*100)
+  end
+
   def initialize exercise, user=nil
     @exercise = exercise
     @user = user
