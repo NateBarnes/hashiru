@@ -118,6 +118,7 @@ namespace :seed do
   desc 'Seed Efficacy'
   task :efficacy => :environment do
     GeneralEfficacyGenerator.new.perform
+    ClusterEfficacyGenerator.new.perform
   end
 end
 
