@@ -31,7 +31,7 @@ namespace :seed do
       { :name => "Sprints", :time => 50, :units => '["miles", "minutes"]', :instructions => "Fast pace is 9:50/mi to 10:00/mi.  Splitting up the run lets you run faster and maintain a tempo effort."},
       { :name => "Fast 1 Mile", :time => 15, :units => '["miles", "minutes"]', :instructions => "Run 1 mile as fast as you can. The faster you run the more time you have left to rest. Target is under 7mpm."}
     ]
-
+    Exercise.delete_all # removes previously seeded exercises
     exercises.each do |exercise|
       Exercise.create exercise
     end
