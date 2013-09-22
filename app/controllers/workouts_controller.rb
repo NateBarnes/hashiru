@@ -8,7 +8,6 @@ class WorkoutsController < ApplicationController
     workout_params[:measurements_attributes].each do |_, measurement_params|
       measurement = Measurement.find(measurement_params.delete :id)
       measurement.update_attributes measurement_params
-      binding.pry #does the meas have a wo
     end
     if @workout.save
       redirect_to @workout
