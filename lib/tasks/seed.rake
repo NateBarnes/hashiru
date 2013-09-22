@@ -62,20 +62,6 @@ namespace :seed do
       { :name => "Elizabeth", :gender => "female", :longest_distance => 16.4, :mile_time => 415_000 }
     ]
 
-<<<<<<< HEAD
-
-  desc 'Seed Workouts'
-  task :workouts => :environment do
-    workouts = [
-      {:monday :[["Long Slow Run", "Fast 1 Mile"].sample]},
-      {:wednesday :["Pull Ups", "Sprints", "Scorpion", "Mixed-Grip Chinup", "Overhead Lunge", "10x800", "16x400m", "Core: Side Plank", "Core: Bridge", "Swim workout", "Single-Leg Squat", "Plank Flip", "Hands-Up Lunge", "Ecliptical Machine Training", "Pool Running", "Swim", "Indoor Rowing", "Indoor Cycling", "Speed Biking", "Long Slow Biking", "Squats", "Sit Ups", "Push Ups", "Pull Ups"].sample(3)},
-      {:friday :["Pull Ups", "Sprints", "Scorpion", "Mixed-Grip Chinup", "Overhead Lunge", "10x800", "16x400m", "Core: Side Plank", "Core: Bridge", "Swim workout", "Single-Leg Squat", "Plank Flip", "Hands-Up Lunge", "Ecliptical Machine Training", "Pool Running", "Swim", "Indoor Rowing", "Indoor Cycling", "Speed Biking", "Long Slow Biking", "Squats", "Sit Ups", "Push Ups", "Pull Ups"].sample(3)},
-      {:saturday :["Pull Ups", "Sprints", "Scorpion", "Mixed-Grip Chinup", "Overhead Lunge", "10x800", "16x400m", "Core: Side Plank", "Core: Bridge", "Swim workout", "Single-Leg Squat", "Plank Flip", "Hands-Up Lunge", "Ecliptical Machine Training", "Pool Running", "Swim", "Indoor Rowing", "Indoor Cycling", "Speed Biking", "Long Slow Biking", "Squats", "Sit Ups", "Push Ups", "Pull Ups"].sample(3)}
-    ]
-    workouts.each do |workout|
-      Workout.create workout
-    end   
-=======
     users.each do |user|
       User.create! user
     end
@@ -94,11 +80,14 @@ namespace :seed do
 
   desc 'Seed Workouts'
   task :workouts => :environment do
+    workouts = {
+      :monday => [[Exercise.find_by_name("Long Slow Run"), Exercise.find_by_name("Fast 1 Mile")].sample],
+      :wednesday => [Exercise.find_by_name("Pull Ups"), Exercise.find_by_name("Sprints"), Exercise.find_by_name("Scorpion"), Exercise.find_by_name("Mixed-Grip Chinup"), Exercise.find_by_name("Overhead Lunge"), Exercise.find_by_name("10x800"), Exercise.find_by_name("16x400m"), Exercise.find_by_name("Core: Side Plank"), Exercise.find_by_name("Core: Bridge"), Exercise.find_by_name("Swim workout"), Exercise.find_by_name("Single-Leg Squat"), Exercise.find_by_name("Plank Flip"), Exercise.find_by_name("Hands-Up Lunge"), Exercise.find_by_name("Ecliptical Machine Training"), Exercise.find_by_name("Pool Running"), Exercise.find_by_name("Swim"), Exercise.find_by_name("Indoor Rowing"), Exercise.find_by_name("Indoor Cycling"), Exercise.find_by_name("Speed Biking"), Exercise.find_by_name("Long Slow Biking"), Exercise.find_by_name("Squats"), Exercise.find_by_name("Sit Ups"), Exercise.find_by_name("Push Ups"), Exercise.find_by_name("Pull Ups")].sample(3),
+      :friday => [Exercise.find_by_name("Pull Ups"), Exercise.find_by_name("Sprints"), Exercise.find_by_name("Scorpion"), Exercise.find_by_name("Mixed-Grip Chinup"), Exercise.find_by_name("Overhead Lunge"), Exercise.find_by_name("10x800"), Exercise.find_by_name("16x400m"), Exercise.find_by_name("Core: Side Plank"), Exercise.find_by_name("Core: Bridge"), Exercise.find_by_name("Swim workout"), Exercise.find_by_name("Single-Leg Squat"), Exercise.find_by_name("Plank Flip"), Exercise.find_by_name("Hands-Up Lunge"), Exercise.find_by_name("Ecliptical Machine Training"), Exercise.find_by_name("Pool Running"), Exercise.find_by_name("Swim"), Exercise.find_by_name("Indoor Rowing"), Exercise.find_by_name("Indoor Cycling"), Exercise.find_by_name("Speed Biking"), Exercise.find_by_name("Long Slow Biking"), Exercise.find_by_name("Squats"), Exercise.find_by_name("Sit Ups"), Exercise.find_by_name("Push Ups"), Exercise.find_by_name("Pull Ups")].sample(3),
+      :saturday => [Exercise.find_by_name("Pull Ups"), Exercise.find_by_name("Sprints"), Exercise.find_by_name("Scorpion"), Exercise.find_by_name("Mixed-Grip Chinup"), Exercise.find_by_name("Overhead Lunge"), Exercise.find_by_name("10x800"), Exercise.find_by_name("16x400m"), Exercise.find_by_name("Core: Side Plank"), Exercise.find_by_name("Core: Bridge"), Exercise.find_by_name("Swim workout"), Exercise.find_by_name("Single-Leg Squat"), Exercise.find_by_name("Plank Flip"), Exercise.find_by_name("Hands-Up Lunge"), Exercise.find_by_name("Ecliptical Machine Training"), Exercise.find_by_name("Pool Running"), Exercise.find_by_name("Swim"), Exercise.find_by_name("Indoor Rowing"), Exercise.find_by_name("Indoor Cycling"), Exercise.find_by_name("Speed Biking"), Exercise.find_by_name("Long Slow Biking"), Exercise.find_by_name("Squats"), Exercise.find_by_name("Sit Ups"), Exercise.find_by_name("Push Ups"), Exercise.find_by_name("Pull Ups")].sample(3)
+    }
 
->>>>>>> c8e777517d380447b2162963a9847eaaa744a8d1
-  end
-
-    users = User.all 
+    users = User.all
     users.each do |user|
       25.times do |n|
         s = (n + 1).weeks.ago
@@ -106,7 +95,7 @@ namespace :seed do
         wednesday = s + 3.days
         friday = s + 5.days
         saturday = s + 6.days
-        user.workouts.create! day: monday, exercises: workouts[:monday]
+        workout = user.workouts.create! day: monday, exercises: workouts[:monday]
         user.workouts.create! day: wednesday, exercises: workouts[:wednesday]
         user.workouts.create! day: friday, exercises: workouts[:friday]
         user.workouts.create! day: saturday, exercises: workouts[:saturday]
