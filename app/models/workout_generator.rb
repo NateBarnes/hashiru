@@ -11,7 +11,7 @@ class WorkoutGenerator
     until exercises.size == 5 or total_time > 30
       exercise = Efficacy.top_ten(:user => user).load.sample
       exercises << exercise
-      total_time += exercise.time
+      total_time += (exercise.time || 30)
     end
 
     exercises
