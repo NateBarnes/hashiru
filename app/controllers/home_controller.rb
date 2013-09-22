@@ -8,6 +8,6 @@ class HomeController < ApplicationController
   end
 
   def search
-
+    ACTV.events query, lat_lng: cookies[:lat_lng]
   end
 end
