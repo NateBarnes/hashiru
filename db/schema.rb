@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130921235413) do
+ActiveRecord::Schema.define(version: 20130922011918) do
 
   create_table "exercises", force: true do |t|
     t.integer  "time"
@@ -23,13 +23,21 @@ ActiveRecord::Schema.define(version: 20130921235413) do
     t.string   "instructions"
   end
 
-  create_table "measurements", force: true do |t|
+  create_table "general_efficacies", force: true do |t|
     t.integer  "exercise_id"
-    t.integer  "workout_id"
+    t.float    "speed_score"
+    t.float    "distance_score"
+    t.float    "general_score"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "measurements", force: true do |t|
     t.string   "unit"
     t.integer  "value"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "workout_exercise_id"
   end
 
   create_table "users", force: true do |t|
@@ -53,6 +61,7 @@ ActiveRecord::Schema.define(version: 20130921235413) do
     t.datetime "day"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
 end
