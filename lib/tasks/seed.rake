@@ -1,6 +1,6 @@
 namespace :seed do
 
-  task all: ["exercises", "users", "workouts"]
+  task all: ["exercises", "users", "clusters", "workouts"]
 
   desc 'Seed Exercise'
   task :exercises => :environment do
@@ -33,7 +33,7 @@ namespace :seed do
     ]
 
     exercises.each do |exercise|
-      Exercise.create exercise
+      Exercise.create! exercise
     end
   end
 
@@ -63,13 +63,24 @@ namespace :seed do
     ]
 
     users.each do |user|
-      User.create user
+      User.create! user
+    end
+  end
+
+  desc "Seed Clusters"
+  task :clusters => :environment do
+    generator = UserClusterGenerator.new
+
+    User.all.each do |user|
+      cluster = generator.perform user.gender_num, user.mile_time, user.longest_distance
+      user.cluster = cluster
+      user.save!
     end
   end
 
   desc 'Seed Workouts'
   task :workouts => :environment do
-    
+
   end
 
 end

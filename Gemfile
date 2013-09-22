@@ -12,6 +12,7 @@ gem 'passenger'
 
 gem 'actv'
 gem 'pry'
+gem 'rb-libsvm', :require => 'libsvm'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130922045926) do
+ActiveRecord::Schema.define(version: 20130922061649) do
 
   create_table "events", force: true do |t|
     t.string   "name"
@@ -57,7 +57,8 @@ ActiveRecord::Schema.define(version: 20130922045926) do
     t.string   "gender"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "goal_type"
+    t.string   "goal_type",        default: "both"
+    t.integer  "cluster",          default: 0
   end
 
   create_table "workout_exercises", force: true do |t|
