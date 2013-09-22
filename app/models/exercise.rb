@@ -2,6 +2,7 @@ class Exercise < ActiveRecord::Base
   has_many :workout_exercises, :dependent => :destroy
   has_many :workouts, :through => :workout_exercises
   has_one :general_efficacy, :dependent => :destroy
+  has_many :cluster_efficacies, :dependent => :destroy
 
   after_create :create_efficacies
 

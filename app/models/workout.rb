@@ -11,10 +11,7 @@ class Workout < ActiveRecord::Base
   end
 
   def self.generate user
-    exercises = [
-      Exercise.find_by_name("Push Ups"),
-      Exercise.find_by_name("Fast 1 Mile")
-    ]
+    exercises = WorkoutGenerator.new(user).generate
     workout = user.workouts.build day: Date.today, exercises: exercises
     exercises.each do |exercise|
       JSON.parse(exercise.units).each do |unit|

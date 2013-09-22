@@ -35,4 +35,12 @@ class User < ActiveRecord::Base
     UserClusterGenerator.perform_async gender_num, mile_time, longest_distance
   end
 
+  def goal_score
+    if goal_type == "both"
+      "general"
+    else
+      goal_type
+    end
+  end
+
 end

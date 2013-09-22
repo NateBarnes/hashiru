@@ -28,8 +28,12 @@ class Efficacy
     new_hash
   end
 
-  def self.top_ten user=nil
-    
+  def self.top_ten params={}
+    if params[:user]
+      Exercise.joins(:cluster_efficacies).where(ClusterEfficacy.arel_table[:cluster].eq(params[:user].cluster)).order(ClusterEfficacy.arel_table["#{params[:user].goal_score}_score".to_sym].desc)
+    else
+      Exercise.joins(:general_efficacy).order(GeneralEfficacy.arel_table["#{params.fetch(:type, :speed)}_score".to_sym].desc)
+    end
   end
 
   def initialize exercise, user=nil

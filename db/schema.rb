@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130922061649) do
+ActiveRecord::Schema.define(version: 20130922110921) do
+
+  create_table "cluster_efficacies", force: true do |t|
+    t.integer  "exercise_id"
+    t.integer  "cluster"
+    t.float    "speed_score"
+    t.float    "distance_score"
+    t.float    "general_score"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "events", force: true do |t|
     t.string   "name"
