@@ -1,7 +1,6 @@
 class HomeController < ApplicationController
   def today
     render 'apology' and return
-    redirect_to new_user_path unless current_user
   end
 
   def search
